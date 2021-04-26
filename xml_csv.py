@@ -13,14 +13,9 @@ import mysql
 class xml_csv:
 
     def __init__(self, input_file, output_file, encoding='utf-8'):
-        """Initialize the class with the paths to the input xml file
-        and the output csv file
 
-        Keyword arguments:
-        input_file -- input xml filename
-        output_file -- output csv filename
-        encoding -- character encoding
-        """
+        # Initialize the class with the paths to the input xml file
+        # and the output csv file
 
         self.output_buffer = []
         self.output = None
@@ -38,22 +33,9 @@ class xml_csv:
     def convert(self, tag="item", delimiter=",", ignore=[], noheader=False,
                 limit=-1, buffer_size=1000, quotes=True):
 
-        """Convert the XML file to CSV file
-
-            Keyword arguments:
-            tag -- the record tag. eg: item
-            delimiter -- csv field delimiter
-            ignore -- list of tags to ignore
-            limit -- maximum number of records to process
-            buffer_size -- number of records to keep in buffer before writing to disk
-            quotes -- insert quotes around values (e.g. "user@domain.com")
-
-            Returns:
-            number of records converted,
-        """
+        # Convert the XML file to CSV file
 
         # get to the root
-        # to ensure support for python 2/3 versions: iter.next() in python 2 changed to next(iter) in python 3
         try:
             try:
                 # for py version 2.x
@@ -132,7 +114,7 @@ class xml_csv:
         return n
 
     def _write_buffer(self):
-        """Write records from buffer to the output file"""
+        # Write records from buffer to the output file
 
         self.output.write('\n'.join(self.output_buffer) + '\n')
         self.output_buffer = []
@@ -150,7 +132,7 @@ def main():
     findXmlFiles("F:/xml_python/", listOffiles)
     number = 1
     for file in listOffiles:
-        converter = xml2csv(file, "F:/xml_python/sample{}.csv".format(number), "utf-8")
+        converter = xml_csv(file, "F:/xml_python/sample{}.csv".format(number), "utf-8")
         converter.convert("employee")
         uploadDtb("F:/xml_python/sample{}.csv".format(number))
         number = number + 1
