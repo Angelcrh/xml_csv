@@ -10,7 +10,7 @@ import sqlite3
 import mysql
 
 
-class xml_csv:
+class Xml_csv:
 
     def __init__(self, input_file, output_file, encoding='utf-8'):
 
@@ -127,17 +127,6 @@ def findXmlFiles(path, listOfFiles):
         listOfFiles.append(fullname)
 
 
-def main():
-    listOffiles = []
-    findXmlFiles("F:/xml_python/", listOffiles)
-    number = 1
-    for file in listOffiles:
-        converter = xml_csv(file, "F:/xml_python/sample{}.csv".format(number), "utf-8")
-        converter.convert("employee")
-        uploadDtb("F:/xml_python/sample{}.csv".format(number))
-        number = number + 1
-
-
 def uploadDtb(sample):
     # Import CSV
     data = pd.read_csv(sample)
@@ -176,6 +165,19 @@ def uploadDtb(sample):
                        values
                        )
     mydb.commit()
+
+
+def main():
+    listOffiles = []
+    findXmlFiles("F:/xml_python/", listOffiles)
+    number = 1
+    for file in listOffiles:
+        converter = Xml_csv(file, "F:/xml_python/sample{}.csv".format(number), "utf-8")
+        converter.convert("employee")
+        uploadDtb("F:/xml_python/sample{}.csv".format(number))
+        number = number + 1
+
+
 
 
 if __name__ == "__main__":
