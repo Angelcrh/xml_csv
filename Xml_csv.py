@@ -9,6 +9,7 @@ import mysql
 import pandas as pd
 
 # from People import People
+from People import People
 
 
 class Xml_csv:
@@ -175,8 +176,8 @@ def main():
     for file in listOffiles:
         converter = Xml_csv(file, "F:/xml_python/sample{}.csv".format(number), "utf-8")
         converter.convert("employee")
-        # people = People()
-        uploadDtb("F:/xml_python/sample{}.csv".format(number))
+        people = People()
+        people.uploadDtb("F:/xml_python/sample{}.csv".format(number))
         number = number + 1
 
 
